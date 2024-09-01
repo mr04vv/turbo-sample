@@ -34,7 +34,7 @@ jobs:
           # Changesets標準のコマンドの代わりに
           # ルートプロジェクトのpackage.jsonのnpm-scriptsを実行する
           version: pnpm ci:version
-          publish: pnpm publish
+          publish: pnpm ci:publish
           # PRのタイトルを指定
           title: '[ci] release'
           # PRのコミットメッセージを指定
