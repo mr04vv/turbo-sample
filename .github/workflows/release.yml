@@ -26,25 +26,22 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install
-        
-      - name: Get list of changed packages
-        id: get_changed_packages
-        run: |
-          changed_packages=$(npx changeset status --since-ref=$(git rev-parse HEAD~1) --json | jq -r '.releases[].name')
-          echo "::set-output name=changed_packages::${changed_packages}"
 
-      - name: Release changed packages
-        if: steps.get_changed_packages.outputs.changed_packages != ''
-        run: |
-          for package in $(echo ${{ steps.get_changed_packages.outputs.changed_packages }}); do
-            # Replace this with your custom release script for each package
-            echo "Releasing $package"
-            # Example: Create a GitHub release and push tags
-            version=$(jq -r ".version" "packages/$package/package.json")
-            tag="v${version}"
-            git tag $tag
-            git push origin $tag
+      - name: Create release PR or publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # Changesets標準のコマンドの代わりに
+          # ルートプロジェクトのpackage.jsonのnpm-scriptsを実行する
+          version: pnpm ci:version
+          publish: pnpm ci:publish
+          # PRのタイトルを指定
+          title: '[ci] release'
+          # PRのコミットメッセージを指定
+          commit: '[ci] release'
+          # GitHubのReleaseを作成しない（任意）
+          createGithubReleases: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            # Create a GitHub release using the `gh` CLI
-            gh release create $tag --title "$package $version" --notes "Release notes for $package $version"
-          done
+      
