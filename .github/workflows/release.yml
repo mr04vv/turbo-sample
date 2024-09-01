@@ -34,7 +34,7 @@ jobs:
           # Changesets標準のコマンドの代わりに
           # ルートプロジェクトのpackage.jsonのnpm-scriptsを実行する
           version: GH_TOKEN=${{ secrets.GITHUB_TOKEN }} pnpm ci:version
-          publish: pnpm ci:publish
+          publish: GH_TOKEN=${{ secrets.GITHUB_TOKEN }} pnpm ci:publish
           # PRのタイトルを指定
           title: '[ci] release'
           # PRのコミットメッセージを指定
