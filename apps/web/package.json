@@ -6,7 +6,8 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "publish": "gh release create $npm_package_name/$npm_package_version"
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
