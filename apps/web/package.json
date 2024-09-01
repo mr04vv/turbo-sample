@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ci:publish": "gh release create $npm_package_name/$npm_package_version"
+    "ci:publish": "echo $GH_TOKEN && echo GITHUB_TOKEN && gh release create $npm_package_name/$npm_package_version"
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
