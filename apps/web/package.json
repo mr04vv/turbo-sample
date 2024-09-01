@@ -6,8 +6,7 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postpublish": "gh-release --repo mr04vv/turbo-sample"
+    "lint": "next lint"
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
