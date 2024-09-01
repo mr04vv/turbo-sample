@@ -1,5 +1,11 @@
 # web
 
+## 0.1.8
+
+### Patch Changes
+
+- 766b6c0: :wrench: chore: test
+
 ## 0.1.7
 
 ### Patch Changes
